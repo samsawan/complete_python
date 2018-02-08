@@ -14,13 +14,13 @@ def determine_player_names():
 
 def render_board():
 	global board
-	# print board
-	LINE = '-----'
-	print('{0}|{1}|{2}').format(board[0][0], board[0][1], board[0][2])
+	LINE = '  -----'
+	print '  0 1 2'
+	print('0 {0}|{1}|{2}').format(board[0][0], board[0][1], board[0][2])
 	print LINE
-	print('{0}|{1}|{2}').format(board[1][0], board[1][1], board[1][2])
+	print('1 {0}|{1}|{2}').format(board[1][0], board[1][1], board[1][2])
 	print LINE
-	print('{0}|{1}|{2}').format(board[2][0], board[2][1], board[2][2])
+	print('2 {0}|{1}|{2}').format(board[2][0], board[2][1], board[2][2])
 
 def take_turn(player):
 	global board
