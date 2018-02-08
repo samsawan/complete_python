@@ -48,7 +48,7 @@ def parse_input(choice):
 
 
 def no_winner():
-	return row_check()
+	return (row_check() and diagonal_check())
 
 
 def row_check():
@@ -56,10 +56,19 @@ def row_check():
 	for row in board:
 		key = row[0]
 		if key != ' ' and check:
-			print row
-			print check
 			check = not (row[0] == row[1] and row[0] == row[2])
 	return check
+
+
+def diagonal_check():
+	middle = board[1][1]
+	first_diagonal = (middle == board[0][0] and middle == board[2][2])
+	second_diagonal = (middle == board[0][2] and middle == board[2][0])
+	return not (middle != ' ' and (first_diagonal or second_diagonal))
+
+
+def declare_winner(player):
+	print('{0} is the winner! Congratulations!').format(player['name'])
 
 
 def play():
@@ -71,5 +80,6 @@ def play():
 		current_player = change_player(current_player)
 		take_turn(current_player)
 		render_board()
+	declare_winner(current_player)
 
 play()
