@@ -25,17 +25,36 @@ def render_board():
 def take_turn(player):
 	global board
 	choice = raw_input('Please enter the coordinates of the board you want\n\tFormatted like 0,1: ')
+	valid_input, info = parse_input(choice)
+	if valid_input:
+		row_input, column_input = info
+		board[row_input][column_input] = player['symbol']
+	else:
+		print info
+		take_turn(player)
+
+
+def change_player(player):
+	return player_two if player == player_one else player_one
+
+
+def parse_input(choice):
 	row_input, column_input = map(lambda choice: int(choice), choice.split(','))
-	board[row_input][column_input] = player['symbol']
+	acceptable_range = range(0, 3)
+	if(row_input in acceptable_range and column_input in acceptable_range):
+		return True, [row_input, column_input]
+	else:
+		return False, 'The row input and column input must be a number within 0 and 2!'
 
 
 def play():
-	global player_one, player_two
 	welcome()
 	determine_player_names()
 	render_board()
-	current_player = player_one
-	take_turn(current_player)
-	render_board()
+	current_player = player_two
+	while True:
+		current_player = change_player(current_player)
+		take_turn(current_player)
+		render_board()
 
 play()
