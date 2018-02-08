@@ -44,7 +44,22 @@ def parse_input(choice):
 	if(row_input in acceptable_range and column_input in acceptable_range):
 		return True, [row_input, column_input]
 	else:
-		return False, 'The row input and column input must be a number within 0 and 2!'
+		return False, '\tThe row input and column input must be a number within 0 and 2!'
+
+
+def no_winner():
+	return row_check()
+
+
+def row_check():
+	check = True;
+	for row in board:
+		key = row[0]
+		if key != ' ' and check:
+			print row
+			print check
+			check = not (row[0] == row[1] and row[0] == row[2])
+	return check
 
 
 def play():
@@ -52,7 +67,7 @@ def play():
 	determine_player_names()
 	render_board()
 	current_player = player_two
-	while True:
+	while no_winner():
 		current_player = change_player(current_player)
 		take_turn(current_player)
 		render_board()
