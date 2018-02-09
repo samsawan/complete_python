@@ -60,7 +60,7 @@ def parse_input(choice):
 		return False, '\tThe row input and column input must be a number within 0 and 2!'
 
 
-def no_winner():
+def winner_check():
 	return (row_check() and diagonal_check() and column_check())
 
 
@@ -93,15 +93,32 @@ def declare_winner(player):
 	print('{0} is the winner! Congratulations!').format(player['name'])
 
 
+def determine_tie():
+	not_tie = False
+	for row in board:
+		for cell in row:
+			if cell == ' ':
+				not_tie = True
+	return not_tie
+
+
 def play():
 	welcome()
 	determine_player_names()
 	render_board()
 	current_player = player_two
-	while no_winner():
+	no_winner = True
+	not_tie_game = True
+	while no_winner and not_tie_game:
 		current_player = change_player(current_player)
 		take_turn(current_player)
+		not_tie_game = determine_tie()
+		no_winner = winner_check()
 		render_board()
-	declare_winner(current_player)
+
+	if not no_winner:
+		declare_winner(current_player)
+	elif not not_tie_game:
+		print('A tie game!')
 
 play()
