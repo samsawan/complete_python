@@ -129,12 +129,7 @@ def clear_board():
 			board[i][j] = ' '
 
 
-def play():
-	welcome()
-	determine_player_names()
-	render_board()
-	full_game()
-
+def play_again():
 	play_again = True
 	while play_again:
 		choice = raw_input('Would you like to play again? (y/n) ')
@@ -146,5 +141,13 @@ def play():
 			print('Ok! See you later, brickulator!')
 			play_again = False
 
+
+
+def play():
+	welcome()
+	determine_player_names()
+	render_board()
+	full_game()
+	play_again()
 
 play()
