@@ -23,15 +23,27 @@ def render_board():
 	print('2 {0}|{1}|{2}').format(board[2][0], board[2][1], board[2][2])
 
 def take_turn(player):
-	global board
 	choice = raw_input('Please enter the coordinates of the board you want\n\tFormatted like 0,1: ')
 	valid_input, info = parse_input(choice)
 	if valid_input:
 		row_input, column_input = info
-		board[row_input][column_input] = player['symbol']
+		enter_choice(row_input, column_input, player)
 	else:
 		print info
 		take_turn(player)
+
+
+def enter_choice(row_input, column_input, player):
+	global board
+	if cell_empty(row_input, column_input):
+		board[row_input][column_input] = player['symbol']
+	else:
+		print('\tPlease select an empty cell!\n')
+		take_turn(player)
+
+
+def cell_empty(row_input, column_input):
+	return board[row_input][column_input] == ' '
 
 
 def change_player(player):
