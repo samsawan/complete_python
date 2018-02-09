@@ -48,7 +48,7 @@ def parse_input(choice):
 
 
 def no_winner():
-	return (row_check() and diagonal_check())
+	return (row_check() and diagonal_check() and column_check())
 
 
 def row_check():
@@ -65,6 +65,15 @@ def diagonal_check():
 	first_diagonal = (middle == board[0][0] and middle == board[2][2])
 	second_diagonal = (middle == board[0][2] and middle == board[2][0])
 	return not (middle != ' ' and (first_diagonal or second_diagonal))
+
+
+def column_check():
+	return check_column(0) and check_column(1) and check_column(2)
+
+
+def check_column(position):
+	key = board[0][position]
+	return not (key != ' ' and (key == board[1][position] and key == board[2][position]))
 
 
 def declare_winner(player):
