@@ -61,7 +61,7 @@ def parse_input(choice):
 
 
 def winner_check():
-	return (row_check() and diagonal_check() and column_check())
+	return not (row_check() and diagonal_check() and column_check())
 
 
 def row_check():
@@ -107,16 +107,16 @@ def play():
 	determine_player_names()
 	render_board()
 	current_player = player_two
-	no_winner = True
+	winner = False
 	not_tie_game = True
-	while no_winner and not_tie_game:
+	while not winner and not_tie_game:
 		current_player = change_player(current_player)
 		take_turn(current_player)
 		not_tie_game = determine_tie()
-		no_winner = winner_check()
+		winner = winner_check()
 		render_board()
 
-	if not no_winner:
+	if winner:
 		declare_winner(current_player)
 	elif not not_tie_game:
 		print('A tie game!')
