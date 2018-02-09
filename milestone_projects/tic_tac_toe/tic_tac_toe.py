@@ -1,6 +1,6 @@
 player_one = {}
 player_two = {}
-board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+board = [[' '] * 3, [' '] * 3, [' '] * 3]
 
 def welcome():
 	print 'Welcome to Tic Tac Toe!'
@@ -94,12 +94,11 @@ def declare_winner(player):
 
 
 def determine_tie():
-	tie = False
 	for row in board:
 		for cell in row:
 			if cell == ' ':
-				tie = True
-	return not tie
+				return True
+	return False
 
 def play_board():
 	current_player = player_two
