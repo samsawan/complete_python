@@ -94,12 +94,12 @@ def declare_winner(player):
 
 
 def determine_tie():
-	not_tie = False
+	tie = False
 	for row in board:
 		for cell in row:
 			if cell == ' ':
-				not_tie = True
-	return not_tie
+				tie = True
+	return not tie
 
 
 def play():
@@ -108,17 +108,17 @@ def play():
 	render_board()
 	current_player = player_two
 	winner = False
-	not_tie_game = True
-	while not winner and not_tie_game:
+	tie_game = False
+	while not winner and not tie_game:
 		current_player = change_player(current_player)
 		take_turn(current_player)
-		not_tie_game = determine_tie()
+		tie_game = determine_tie()
 		winner = winner_check()
 		render_board()
 
 	if winner:
 		declare_winner(current_player)
-	elif not not_tie_game:
-		print('A tie game!')
+	elif tie_game:
+		print('\nA tie game!')
 
 play()
