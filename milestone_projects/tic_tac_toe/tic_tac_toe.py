@@ -101,11 +101,7 @@ def determine_tie():
 				tie = True
 	return not tie
 
-
-def play():
-	welcome()
-	determine_player_names()
-	render_board()
+def play_board():
 	current_player = player_two
 	winner = False
 	tie_game = False
@@ -115,10 +111,18 @@ def play():
 		tie_game = determine_tie()
 		winner = winner_check()
 		render_board()
+	return tie_game, winner, current_player
 
-	if winner:
-		declare_winner(current_player)
-	elif tie_game:
+
+def play():
+	welcome()
+	determine_player_names()
+	render_board()
+	is_tie_game, winner_determined, final_player = play_board()
+
+	if winner_determined:
+		declare_winner(final_player)
+	elif is_tie_game:
 		print('\nA tie game!')
 
 play()
