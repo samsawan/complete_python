@@ -23,7 +23,8 @@ def render_board():
 	print('2 {0}|{1}|{2}').format(board[2][0], board[2][1], board[2][2])
 
 def take_turn(player):
-	choice = raw_input('Please enter the coordinates of the board you want\n\tFormatted like 0,1: ')
+	prompt = '{0}, please enter the coordinates of the cell you want\n\tFormatted like 0,1: '.format(player['name'])
+	choice = raw_input(prompt)
 	valid_input, info = parse_input(choice)
 	if valid_input:
 		row_input, column_input = info
