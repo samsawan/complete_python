@@ -121,12 +121,30 @@ def full_game():
 	elif is_tie_game:
 		print('\nA tie game!')
 
+def clear_board():
+	global board
+	limit = range(0, 3)
+	for i in limit:
+		for j in limit:
+			board[i][j] = ' '
+
 
 def play():
 	welcome()
 	determine_player_names()
 	render_board()
 	full_game()
+
+	play_again = True
+	while play_again:
+		choice = raw_input('Would you like to play again? (y/n) ')
+		if choice == 'y':
+			clear_board()
+			render_board()
+			full_game()
+		else:
+			print('Ok! See you later, brickulator!')
+			play_again = False
 
 
 play()
