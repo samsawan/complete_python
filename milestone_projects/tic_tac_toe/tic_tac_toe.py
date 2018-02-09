@@ -113,16 +113,20 @@ def play_board():
 		render_board()
 	return tie_game, winner, current_player
 
-
-def play():
-	welcome()
-	determine_player_names()
-	render_board()
+def full_game():
 	is_tie_game, winner_determined, final_player = play_board()
 
 	if winner_determined:
 		declare_winner(final_player)
 	elif is_tie_game:
 		print('\nA tie game!')
+
+
+def play():
+	welcome()
+	determine_player_names()
+	render_board()
+	full_game()
+
 
 play()
